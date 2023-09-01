@@ -8,3 +8,5 @@
 *.3gp filter=lfs diff=lfs merge=lfs -text
 >>>>>>> 42f061abbca796a6f730195756374b05fe57c633
 *.txt filter=lfs diff=lfs merge=lfs -text
+*.wav filter=lfs diff=lfs merge=lfs -text
+*.mp3 filter=lfs diff=lfs merge=lfs -text

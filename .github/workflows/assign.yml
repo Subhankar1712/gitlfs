@@ -1,0 +1,23 @@
+name: Assign Issues Based on Labels
+
+on:
+  issues:
+    types:
+      - opened
+      - labeled
+      - unlabeled
+
+jobs:
+  assign-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Assign Issues
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
+          assignees: ${{ toJson(fromJson(github.event.issue.labels).filter(label => label.name === 'assign').map(label => label.name)) }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
